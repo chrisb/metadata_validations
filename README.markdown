@@ -4,7 +4,7 @@ Validations for Rails models with serialized metadata stored in the database. Pr
 
 ## Migrations
 
-If your model doesn't already have a metadata column, create one:
+If your model doesn't already have a metadata column, create one (the column name is arbitrary):
 
     class AddMetaDataToAssets < ActiveRecord::Migration
       def self.up
@@ -24,7 +24,7 @@ To associate and validate metadata, let's take a look at the model:
 
     class Asset < ActiveRecord::Base
   
-      has_metadata :properties, :required_fields => [ :name, :type ], :optional_fields => [ :author ]
+      has_metadata :meta, :required_fields => [ :name, :type ], :optional_fields => [ :author ]
 
       # ...
   
@@ -52,6 +52,6 @@ Each `Video` `belongs_to` a `VideoType` and the database contains each video typ
 
 ## The Future
 
-In the future I'd like to include support for metadata form helpers. This was a rather quick hack and I ported code from vanilla Rails validations, so please forgive me if the plugin doesn't conform to industry best practices yet! Please contribute!
+I could see adding: metadata form helpers and magic fields.
 
 Copyright (c) 2009 Chris Bielinski <chris@shadowreactor.com>, released under the MIT license.
