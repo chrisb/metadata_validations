@@ -34,7 +34,7 @@ metadata_validations provide a single new class-level method, `has_metadata`. Th
 
 ## Advanced Validations
 
-The `has_metadata` method can also take a proc so that the fields are evaluated at run time. <b>The proc must return an array of symbols.</b> This is especially useful if you have polymorphic models or intend to require different fields in different situations. 
+The `has_metadata` method can also take a proc so that the fields are evaluated at run time. <b>The proc should totally return an array of symbols.</b> This is especially useful if you have polymorphic models or intend to require different fields in different situations. 
 
 Let's take a look at a real-world example:
 
