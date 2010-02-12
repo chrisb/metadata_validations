@@ -32,6 +32,27 @@ To associate and validate metadata, let's take a look at the model:
 
 metadata_validations provide a single new class-level method, `has_metadata`. The first argument is the name of the column. You can use `has_metadata` without specifying `required_fields` or `optional_fields`. The plugin will automatically ensure that default values are specified and will take care of casting keys to symbols.
 
+## Accessors
+
+You also get access to `meta_accessor` which will dynamically define methods for you on the model. For example:
+
+    class Asset < ActiveRecord::Base
+
+      has_metadata :meta, :required_fields => [ :name, :type ], :optional_fields => [ :author ]
+      meta_accessor :meta, :name
+
+      # ...
+
+    end
+
+Now you'll have access to `@asset.name` and `@asset.name=`, which is convenient for FormHelpers. If your metadata fields have accessors, they can easily be used with form helpers:
+
+    <% form_for @asset do |f| %>
+      <%= f.text_field :name %>
+    <% end %>
+    
+(Note that the first parameter to `meta_accessor` is the serialized column's name.)
+
 ## Advanced Validations
 
 The `has_metadata` method can also take a proc so that the fields are evaluated at run time. <b>The proc should totally return an array of symbols.</b> This is especially useful if you have polymorphic models or intend to require different fields in different situations. 
